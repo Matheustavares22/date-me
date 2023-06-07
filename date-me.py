@@ -11,41 +11,57 @@ BUTTON_FONT_SIZE = '12'
 MSG_FONT_SIZE = "16"
 
 
-class DateMe:
-    def __init__(self, master=None):
-        self.widget1 = Frame(master)
-        self.widget1.configure(background=BACKGROUND_COLOR)
-        self.widget1.pack()
+class DateMeApp:
+    def __init__(self):
+        self.root = Tk(className='Date-me')
+        self.root.geometry(SCREEN_SIZE_WIDTH_HEIGHT)
+        self.root.configure(background=BACKGROUND_COLOR)
+        self.root.eval('tk::PlaceWindow . center')
         
-        self.msg = Label(self.widget1, text="Date me?")
+        self.create_widgets()
+        
+    def create_widgets(self):       
+        self.msg = Label(self.root, text="Date me?")
         self.msg["font"] = (DEFAULT_FONT_FAMILY, MSG_FONT_SIZE, "bold")
-        self.msg.configure(background = BACKGROUND_COLOR, foreground='WHITE', height=6)
+        self.msg.configure(background = BACKGROUND_COLOR, foreground='WHITE', height=5)
         self.msg.pack ()
         
-        self.yes = Button(self.widget1, text="yes")
+        button_frame = Frame(self.root)
+        button_frame.configure(background=BACKGROUND_COLOR)
+        button_frame.pack()
+        
+        self.yes = Button(button_frame, text="yes")
         self.yes["font"] = (DEFAULT_FONT_FAMILY,BUTTON_FONT_SIZE)
-        self.yes.configure(background=BACKGROUND_COLOR,command=self.happyness, width = 5)
+        self.yes.configure(background=BACKGROUND_COLOR,command=self.happiness, width = 5)
         self.yes.pack (side=LEFT)
         
-        self.no = Button(self.widget1, text= "no")
+        self.no = Button(button_frame, text= "no")
         self.no["font"] = (DEFAULT_FONT_FAMILY, BUTTON_FONT_SIZE)
         self.no.configure(background= BACKGROUND_COLOR, command = self.runAwayButton, width= 5)
         self.no.pack (side=RIGHT)
+        
     def runAwayButton():
-        a=1
+        # TODO
+        pass
 
         
-    def happyness():
-        a=1
+    def happiness(self):
+        new_window = Toplevel(self.root)
+        new_window.title("SO YOU CHOOSE HAPPINESS")
+        new_window.configure(background=BACKGROUND_COLOR)
+        new_window
+        
+        
+        #gif_label = Label(new_window, image='path_to_gif')
+        #gif_label.pack()
+
+        exit_button = Button(new_window, text="Exit", command=self.root.destroy)
+        exit_button.pack()
 
 
 def main():
-    root = Tk(className='Date-me')
-    root.geometry(SCREEN_SIZE_WIDTH_HEIGHT)
-    root.configure(background= BACKGROUND_COLOR)
-    root.eval('tk::PlaceWindow . center')
-    DateMe(root)
-    root.mainloop()
+    app = DateMeApp()
+    app.root.mainloop()
     
     
 if __name__ == '__main__':
