@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import random
+#import random
 
 
 #CONSTANTS
@@ -49,12 +49,20 @@ class DateMeApp:
         new_window = Toplevel(self.root)
         new_window.title("SO YOU CHOOSE HAPPINESS")
         new_window.configure(background=BACKGROUND_COLOR)
-        new_window
+        new_window.update_idletasks()
         
+        gif_label = Label(new_window, image='love.gif') 
+        gif_label.pack()
+                
+        new_window.update_idletasks()
+        window_width = new_window.winfo_width()
+        window_height = new_window.winfo_height()
+        screen_width = new_window.winfo_screenwidth()
+        screen_height = new_window.winfo_screenheight()
+        x = int((screen_width / 2) - (window_width / 2))
+        y = int((screen_height / 2) - (window_height / 2))
+        new_window.geometry(f"+{x}+{y}")
         
-        #gif_label = Label(new_window, image='path_to_gif')
-        #gif_label.pack()
-
         exit_button = Button(new_window, text="Exit", command=self.root.destroy)
         exit_button.pack()
 
